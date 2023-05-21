@@ -16,7 +16,7 @@ public class Main {
 		while(st.hasMoreTokens()) {	
 	        
 			// 소수인 경우 true, 아닌 경우 false   
-			boolean isPrime = true;
+			boolean isDecimal = true;
 			
 			int num = Integer.parseInt(st.nextToken());
 			
@@ -25,15 +25,14 @@ public class Main {
 			}
 			for(int i = 2; i <= Math.sqrt(num); i++) {
 				if(num % i == 0) {
-					isPrime = false;
+					isDecimal = false;
 					break;
 				}
 			}
-			if(isPrime) {
+			if(isDecimal) {
 				cnt++;
 			}
 		}
 		System.out.println(cnt);		
 	}
 }
-
