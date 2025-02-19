@@ -4,21 +4,23 @@ using namespace std;
 
 int main()
 {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
 	int A, B, C;
 	int cnt[10] = { 0 };
 
 	cin >> A >> B >> C;
 
-	int result = A * B * C;
+	string result = to_string(A * B * C);
 
-	// int 형을 string 형으로 바꾸기 (string 헤더 추가)
-	string str = to_string(result);
-
-	for (char ch : str)
+	for (int i = 0; i < result.length(); i++)
 	{
-		cnt[ch - '0']++;
+		cnt[result[i] - '0']++;
 	}
 
 	for (int i = 0; i < 10; i++)
+	{
 		cout << cnt[i] << "\n";
+	}
 }
