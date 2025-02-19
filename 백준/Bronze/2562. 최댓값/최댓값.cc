@@ -1,24 +1,26 @@
-#include <iostream> 
-#include <algorithm>
+#include <iostream>
 using namespace std;
 
-int main() {
-	ios_base::sync_with_stdio(false);	
-	cin.tie(NULL);	
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
 
-	int arr[9];
+	int num;
 	int max = 0;
-	int pos = 0;
+	int index;
 
-	for (int i = 0; i < 9; i++) {
-		cin >> arr[i];
+	for (int i = 0; i < 9; i++)
+	{
+		cin >> num;
 
-		if (max < arr[i]) {
-			max = arr[i];
-			pos = i + 1;
+		if (num > max)
+		{
+			max = num;
+			index = i + 1;
 		}
 	}
-	
-	cout << max << "\n" << pos;
+
+	cout << max << "\n" << index;
 
 }
