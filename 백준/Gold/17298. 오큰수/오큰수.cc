@@ -2,17 +2,18 @@
 #include <stack>
 using namespace std;
 
+
+int N;
+stack<int> s;
+int num[1000001];
+int result[1000001];
+
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 
-	int N;
 	cin >> N;
-
-	stack<int> s;
-	int num[1000001];
-	int result[1000001];
 
 	for (int i = 0; i < N; i++)
 	{
