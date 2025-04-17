@@ -41,7 +41,6 @@ int main()
 		}
 		else
 		{
-			//cout << "?";
 			flag = true;
 			cout << st.top();
 			st.pop();
