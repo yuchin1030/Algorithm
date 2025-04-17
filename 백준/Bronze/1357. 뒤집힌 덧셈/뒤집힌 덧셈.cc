@@ -1,51 +1,24 @@
 #include <iostream>
-#include <stack>
 #include <string>
 #include <algorithm>
 using namespace std;
 
-int Rev(string str)
-{
-	reverse(str.begin(), str.end());
-
-	int num = stoi(str);
-
-	return num;
-}
-
 int main()
 {
+	// stoi() 는 문자열 앞에 0이 붙어 있어도, 자동으로 앞자리의 0을 무시하고 정수로 변환해줌
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
 	string X, Y;
 	cin >> X >> Y;
 
-	string temp = to_string(Rev(X) + Rev(Y));
+	reverse(X.begin(), X.end());
+	reverse(Y.begin(), Y.end());
 
-	stack<char> st;
+	string temp = to_string(stoi(X) + stoi(Y));
 
-	for (int i = 0; i < temp.length(); i++)
-	{
-		st.push(temp[i]);
-	}
-	
-	bool flag = false;
+	reverse(temp.begin(), temp.end());
 
-	while (!st.empty())
-	{
-		if (st.top() == '0' && !flag)
-		{
-			st.pop();
-			continue;
-		}
-		else
-		{
-			flag = true;
-			cout << st.top();
-			st.pop();
-		}
-		
-	}
+	cout << stoi(temp);
 	
 }
