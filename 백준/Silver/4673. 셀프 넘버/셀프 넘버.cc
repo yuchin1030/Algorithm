@@ -25,7 +25,12 @@ int main()
 			}
 
 			if (sum <= 10000)
-				v[sum] = true;
+			{
+				if (v[sum])
+					break;
+				else
+					v[sum] = true;
+			}
 			else
 				break;
 		}
