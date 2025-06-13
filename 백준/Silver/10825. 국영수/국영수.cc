@@ -25,7 +25,10 @@ bool compare(STUDENT a, STUDENT b)
 
 int main() 
 {
-	 int N;
+    ios::sync_with_stdio(false);
+	cin.tie(NULL);
+    
+	int N;
     cin >> N;
  
     vector<STUDENT> v(N);
