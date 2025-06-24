@@ -24,9 +24,7 @@ int main()
 		{
 			if (cnt == K)
 				break;
-			else if (m[j])
-				continue;
-			else
+			else if (!m[j])
 			{
 				m[j] = true;
 				cnt++;
