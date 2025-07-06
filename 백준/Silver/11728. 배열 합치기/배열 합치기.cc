@@ -34,9 +34,6 @@ int main()
 	for (int i = 0; i < M; i++)
 		cin >> b[i];
 
-	sort(a.begin(), a.end());
-	sort(b.begin(), b.end());
-
 	int aIndex = 0; int bIndex = 0;
 
 	while (aIndex < N && bIndex < M)
