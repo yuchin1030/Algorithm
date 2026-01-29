@@ -5,49 +5,48 @@ using namespace std;
 int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	cin.tie(NULL);
+	
+	int N;
+	cin >> N;
 
-	int T;
-	cin >> T;
-
-	for (int i = 0; i < T; i++)
+	while (N--)
 	{
-		string L;
-		cin >> L;
-		
-		list<char> l;
-		list<char>::iterator it = l.begin();
+		string str;
+		cin >> str;
 
-		for (int j = 0; j < L.length(); j++)
+		list<char> L;
+		list<char>::iterator cursor = L.end();
+
+		for (auto ch : str)
 		{
-			if (L[j] == '<')
+			switch (ch)
 			{
-				if (it != l.begin())
-					it--;
-			}
-			else if (L[j] == '>')
-			{
-				if (it != l.end())
-					it++;
-			}
-			else if (L[j] == '-')
-			{
-				if (it != l.begin())
+			case '<':
+				if (cursor != L.begin())
+					cursor--;
+				break;
+			case '>':
+				if (cursor != L.end())
+					cursor++;
+				break;
+			case '-':
+				if (cursor != L.begin())
 				{
-					it--;
-					it = l.erase(it);
+					cursor--;
+					cursor = L.erase(cursor);
 				}
+				break;
+			default:
+				L.insert(cursor, ch);
+				break;
 			}
-			else
-			{
-				l.insert(it, L[j]);
-			}
-
 		}
 
-		for (char c : l)
+		for (auto c : L)
 			cout << c;
-
 		cout << "\n";
 	}
+
+	
 }
