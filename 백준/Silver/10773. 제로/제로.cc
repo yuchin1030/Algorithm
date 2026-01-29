@@ -5,33 +5,27 @@ using namespace std;
 int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-
-	int K;
+	cin.tie(NULL);
+	
+	int K; long long sum = 0;
 	cin >> K;
 
-	stack<int> s;
-	long long sum = 0;
-
-	for (int i = 0; i < K; i++)
+	stack<int> st;
+	while (K--)
 	{
 		int num;
 		cin >> num;
 
-		if (num == 0)
-		{
-			if (!s.empty())
-			{
-				int temp = s.top();
-				s.pop();
-				sum -= temp;
-			}
-		}
+		if (num)
+			st.push(num);
 		else
-		{
-			s.push(num);
-			sum += num;
-		}
+			st.pop();
+	}
+
+	while (!st.empty())
+	{
+		sum += st.top();
+		st.pop();
 	}
 
 	cout << sum;
