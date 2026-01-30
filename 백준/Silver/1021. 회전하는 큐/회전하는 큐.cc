@@ -1,70 +1,45 @@
 #include <iostream>
 #include <deque>
+#include <algorithm>
 using namespace std;
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
-
-	int N, M;
+	
+	int N, M, cnt = 0;
 	cin >> N >> M;
 
 	deque<int> d;
 
 	for (int i = 1; i <= N; i++)
 		d.push_back(i);
-	
-	int index; int cnt = 0;
 
 	for (int i = 0; i < M; i++)
 	{
 		int num;
 		cin >> num;
 
-		for (int j = 0; j < d.size(); j++)
+		// find: 찾고자 하는 값(num)이 있는 주소(iterator)
+		// iterator - iterator(d.begin()) = 처음부터 몇 번째 위치인지(거리)
+		int index = find(d.begin(), d.end(), num) - d.begin();
+		
+		while (d.front() != num)
 		{
-			if (d[j] == num)
+			if (index < d.size() - index)
 			{
-				index = j;
-				break;
-			}
-		}
-
-		// 앞
-		if (index <= d.size() / 2)
-		{
-			while (true)
-			{
-				if (d.front() == num)
-				{
-					d.pop_front();
-					break;
-				}
-
 				d.push_back(d.front());
 				d.pop_front();
-				cnt++;
 			}
-		}
-		// 뒤
-		else
-		{
-			while (true)
+			else
 			{
-				if (d.front() == num)
-				{
-					d.pop_front();
-					break;
-				}
-
 				d.push_front(d.back());
 				d.pop_back();
-				cnt++;
 			}
+			cnt++;
 		}
-
+		d.pop_front();
 	}
-
 	cout << cnt;
 }
