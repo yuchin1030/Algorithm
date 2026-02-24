@@ -12,42 +12,40 @@ int main()
 	int T;
 	cin >> T;
 
-	for (int i = 0; i < T; i++)
+	while (T--)
 	{
-		int n; string p, str;
-
+		string p; int n; string str;
 		cin >> p >> n >> str;
 
-		deque<int> d;
+		deque<int> dq;
 		string temp = "";
 
-		for (int j = 0; j < str.length(); j++)
+		for (int i = 0; i < str.length(); i++)
 		{
 			if (n != 0)
 			{
-				if (str[j] >= '0' && str[j] <= '9')
+				if (str[i] >= '0' && str[i] <= '9')
+					temp += str[i];
+				else if (str[i] == ',' || str[i] == ']')
 				{
-					temp += str[j];
-				}
-				else if (str[j] == ',' || str[j] == ']')
-				{
-					d.push_back(stoi(temp));
+					dq.push_back(stoi(temp)); 
 					temp = "";
 				}
 			}
-			
 		}
-		
-		bool flag = true; // 에러 여부
-		bool dir = true; // 정방향, 역방향
 
-		for (int j = 0; j < p.length(); j++)
+		bool flag = true;	// 에러 여부
+		bool dir = true;	// 정방향 여부
+
+		for (int i = 0; i < p.length(); i++)
 		{
-			if (p[j] == 'R')
+			if (p[i] == 'R')
+			{
 				dir = !dir;
+			}
 			else
 			{
-				if (d.empty())
+				if (dq.empty())
 				{
 					cout << "error\n";
 					flag = false;
@@ -56,29 +54,28 @@ int main()
 				else
 				{
 					if (dir)
-						d.pop_front();
+						dq.pop_front();
 					else
-						d.pop_back();
+						dq.pop_back();
 				}
 			}
-
 		}
 
 		if (flag)
 		{
 			if (!dir)
-				reverse(d.begin(), d.end());
+				reverse(dq.begin(), dq.end());
 
 			cout << '[';
-			for (int k = 0; k < d.size(); k++)
+			for (int i = 0; i < dq.size(); i++)
 			{
-				cout << d[k];
+				cout << dq[i];
 
-				if (k != d.size() - 1)
+				if (i != dq.size() - 1)
 					cout << ',';
 			}
 			cout << "]\n";
 		}
-
 	}
+	
 }
