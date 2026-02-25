@@ -6,69 +6,43 @@ using namespace std;
 int main()
 {
 	ios::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	cin.tie(NULL);
 
-	while (true)
+	string str;
+
+	while (getline(cin, str))
 	{
-		stack<char> s;
-		string str;
-		getline(cin, str);
-
 		if (str == ".")
 			break;
+		
+		stack<char> st;
+		bool flag = true;
 
-		// 스택이 비어있는 것만으로 판단하면
-		// )) 와 같은 반례 발생. 따라서 불 변수 하나 필요
-		bool bBalanced = true;
-
-		for (int i = 0; i < str.length(); i++)
+		for (auto c : str)
 		{
-			if (str[i] == '(' || str[i] == '[')
+			if (c == '(' || c == '[')
+				st.push(c);
+			else if (c == ')')
 			{
-				s.push(str[i]);
+				if (st.empty() || st.top() != '(')
+				{
+					flag = false;
+					break;
+				}
+				st.pop();
 			}
-			else if (str[i] == ')')
+			else if (c == ']')
 			{
-				// 닫는 괄호가 먼저 입력됐을때
-				if (s.empty())
+				if (st.empty() || st.top() != '[')
 				{
-					bBalanced = false;
+					flag = false;
 					break;
 				}
-				// ()인 경우만 pop, [) 일 경우 제외
-				else if (s.top() == '(')
-				{
-					s.pop();
-				}
-				else
-				{
-					bBalanced = false;
-					break;
-				}
-			}
-			else if (str[i] == ']')
-			{
-				// 닫는 괄호가 먼저 입력됐을때
-				if (s.empty())
-				{
-					bBalanced = false;
-					break;
-				}
-				// []인 경우만 pop, (] 일 경우 제외
-				else if (s.top() == '[')
-				{
-					s.pop();
-				}
-				else
-				{
-					bBalanced = false;
-					break;
-				}
+				st.pop();
 			}
 		}
-		
 
-		if (s.empty() && bBalanced)
+		if (st.empty() && flag)
 			cout << "yes\n";
 		else
 			cout << "no\n";
