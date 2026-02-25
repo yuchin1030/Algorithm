@@ -15,22 +15,22 @@ int main()
 		string str;
 		cin >> str;
 
-		stack<char> s;
+		stack<char> st;
 
-		for (int i = 0; i < str.length(); i++)
+		if (str.length() % 2 == 1)
+			continue;
+
+		for (auto c : str)
 		{
-			if (s.empty())
-				s.push(str[i]);
+			if (st.empty())
+				st.push(c);
+			else if (c == st.top())
+				st.pop();
 			else
-			{
-				if (s.top() == str[i])
-					s.pop();
-				else
-					s.push(str[i]);
-			}
+				st.push(c);
 		}
-
-		if (s.empty())
+		
+		if (st.empty())
 			cnt++;
 	}
 
