@@ -4,39 +4,39 @@ using namespace std;
 
 int main()
 {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
 	int T;
 	cin >> T;
 
-	for (int i = 0; i < T; i++)
+	while (T--)
 	{
-		stack<char> stack;
 		string str;
 		cin >> str;
+		
+		stack<char> st;
+		bool flag = true;
 
-		for (int j = 0; j < str.length(); j++)
+		for (auto c : str)
 		{
-			if (str[j] == '(')
+			if (c == '(')
+				st.push(c);
+			else if (!st.empty())
 			{
-				stack.push(str[j]);
+				if (c == ')')
+					st.pop();
 			}
-			else if (str[j] == ')')
+			else
 			{
-				if (stack.empty())
-				{
-					stack.push(str[j]);
-					break;
-				}
-				else
-				{
-					stack.pop();
-				}
+				flag = false;
+				break;
 			}
 		}
 
-		if (stack.empty())
+		if (st.empty() && flag)
 			cout << "YES\n";
 		else
 			cout << "NO\n";
 	}
 }
-// 참고 : https://park-peanut.tistory.com/29
