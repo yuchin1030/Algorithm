@@ -1,30 +1,29 @@
 #include <iostream>
-#include <utility>
 #include <queue>
 #include <algorithm>
 using namespace std;
 
 #define X first
 #define Y second
-
-string board[102];	// 미로 표현용 2차원배열
-int dist[102][102];		// 이동칸 기록용 2차원 배열
-int N, M;	// 행 열
-int dx[4] = {-1, 1, 0, 0};	// 상하좌우 x축 방향
-int dy[4] = {0,0,-1,1};		// 상하좌우 y축 방향
+string board[102];
+int dist[102][102];
+int n, m;
+int dx[4] = { -1,1,0,0 };
+int dy[4] = { 0,0,-1,1 };
 
 int main()
 {
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	cin >> N >> M;
+	cin >> n >> m;
 
-	for (int i = 0; i < N; i++)
-			cin >> board[i];
+	for (int i = 0; i < n; i++)
+		cin >> board[i];
 
-	for (int i = 0; i < N; i++)
-		fill(dist[i], dist[i] + M, -1);
+	// [시작, 끝)
+	for (int i = 0; i < n; i++)
+		fill(dist[i], dist[i] + m, -1);
 
 	queue<pair<int, int>> q;
 	q.push({ 0,0 });
@@ -40,9 +39,9 @@ int main()
 			int nx = cur.X + dx[dir];
 			int ny = cur.Y + dy[dir];
 
-			if (nx < 0 || nx >= N || ny < 0 || ny >= M)
+			if (nx < 0 || nx >= n || ny < 0 || ny >= m)
 				continue;
-			if (dist[nx][ny] >= 0 || board[nx][ny] != '1')
+			if (board[nx][ny] == '0' || dist[nx][ny] >= 0)
 				continue;
 
 			dist[nx][ny] = dist[cur.X][cur.Y] + 1;
@@ -50,5 +49,5 @@ int main()
 		}
 	}
 
-	cout << dist[N - 1][M - 1] + 1;
+	cout << dist[n - 1][m - 1] + 1;
 }
